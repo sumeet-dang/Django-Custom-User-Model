@@ -10,10 +10,10 @@ The Following Features are added as of yet
 - New User Registration
 - User Login
 - User Logout
+- Login Using Social Accounts(Presently google/facebook/github)
 
 # To Be Added
 
-- Login Using Social Accounts
 - Password Retreieval
 
 # Technology stack
