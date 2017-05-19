@@ -18,7 +18,7 @@ The Following Features are added as of yet
 
 # Technology stack
 
-- Python 2.7 / 3.5
-- Django > 1.9
+- Python 3.6
+- Django > 1.10
 - Twitter Bootstrap 3
 - jQuery 2
