@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<br><br><br>
+<div class="row outline">
+  <div class="col-sm-12 center-align padded">
+
+    <h2>Create New Account</h2>
+    <hr>
+  </div>
+  <div class="col-xs-12 col-md-4 verticalLine">
+    <div class="row">
+      <h4>You can also </h4>
+    </div>
+    <br>
+    <div class="row center-align opac">
+      <div style="display: inline-block;">
+        <a class="btn btn-block btn-social btn-facebook center-align">
+          <span class="fa fa-facebook"></span> Sign in with Facebook
+        </a>
+
+
+
+        <a class="btn btn-block btn-social btn-google center-align">
+          <span class="fa fa-google"></span> Sign in with Google
+        </a>
+
+
+      <a class="btn btn-block btn-social btn-github center-align">
+        <span class="fa fa-github"></span> Sign in with Github
+      </a>
+      </div>
+      <br><br><br><br>
+      <div style="display: inline-block;">
+          Already a member? <br>      
+          <a href="{% url 'login' %}">Sing In</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-8">
+    <form method="post">
+      {% csrf_token %}
+      {{ user_form.as_p }}
+      <br>
+      <button type="submit" class="btn btn-success">Create My Account</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<script>
+$.validate({
+modules : 'security',
+onModulesLoaded : function() {
+  var optionalConfig = {
+    fontSize: '12pt',
+    padding: '4px',
+    bad : 'Very bad',
+    weak : 'Weak',
+    good : 'Good',
+    strong : 'Strong'
+  };
+
+  $('input[name="pass"]').displayPasswordStrength(optionalConfig);
+}
+});
+</script>
+{% endblock %}
