@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
-    'core'
+    'core',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'CompareKaro.urls'
@@ -66,10 +68,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+   'django.contrib.auth.backends.ModelBackend',
+   'social_core.backends.google.GoogleOAuth2',
+   'social_core.backends.github.GithubOAuth2',
+   'social_core.backends.facebook.FacebookOAuth2',
+
+)
 
 WSGI_APPLICATION = 'CompareKaro.wsgi.application'
 
@@ -84,6 +96,7 @@ DATABASES = {
     }
 }
 
+#SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -103,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SOCIAL_AUTH_USER_MODEL="authentication.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -132,3 +146,14 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'authentication.User'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '288342711592-he4q1q77pk4e22tcai83gub8sn7l0l38.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'PWvCfs_JJ7LWJ3JPgVPz8nMn'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_GITHUB_KEY = '3e76536b67106a2c76ab'
+SOCIAL_AUTH_GITHUB_SECRET = 'be4300005d9fb214a357fd20b1c008ba4e85dcd7'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1406363512765004'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'bb8870c65cfc95bb3659e620f5fba06e'

@@ -24,12 +24,14 @@ class UserManager(BaseUserManager):
             is_staff = is_staff, is_superuser = is_superuser, last_login = now,
             date_joined = now, **kwargs)
         user.set_password(password)
+        user.is_active = True
         user.save(using=self._db)
         return user
 
     def create_user(self, username, email=None, password=None, **kwargs):
         return self._create_user(username, email, password, False, False,
             **kwargs)
+
 
     def create_superuser(self, username, email, password, **kwargs):
         user = self._create_user(username, email, password, True, True,
@@ -46,9 +48,9 @@ class User(AbstractBaseUser,PermissionsMixin):
         validators = [validators.RegexValidator(re.compile('^[\w.@+-]+$'),
         _('Enter a valid username'), _('invalid username'))])
     first_name = models.CharField(_('first_name'),
-        max_length=30)
+        max_length=30, blank=True, null=True)
     last_name = models.CharField(_('last_name'),
-        max_length=30)
+        max_length=30, blank=True, null=True)
     email = models.CharField(_('Email address'),max_length=255)
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text = _('Can Log into Admin Site'))
